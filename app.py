@@ -80,7 +80,7 @@ def admin_dashboard():
             building_id = request.form['building_id']
             building_name = request.form['building_name']
             location_id = request.form['location_id']
-            cursor.execute("UPDATE Buildings SET name = ? AND location_id = ? WHERE id = ?", (building_name,location_id, building_id))
+            cursor.execute("UPDATE Buildings SET name = ?, location_id = ? WHERE id = ?", (building_name,location_id, building_id))
             conn.commit()
 
         # Add House

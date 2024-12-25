@@ -260,7 +260,7 @@
                                 <td>{{ building[1] }}</td> <!-- Building name -->
                                 <td>{{ building[2] }} <!-- Location ID (foreign key) --></td>
                                 <td>
-                                    <button onclick="openModal_bui('{{ building[0] }}', '{{ building[1] }}', '{{ building[2] }}')">Edit</button>
+                                    <button onclick="openModal_bui('{{ building[0] }}', '{{ building[1] }}', '{{building[2]}}')">Edit</button>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -308,9 +308,13 @@
             <h2>Edit Record</h2>
             <form method="POST">
                 <input type="hidden" name="update_building" value="1">
-                <input type="hidden" id="recordId" name="building_id">
-                <input type="text" id="recordName" name="building_name" placeholder="Record Name">
-                <option id="building_loc"value="{{ location[0] }}">{{ location[1] }}</option>
+                <input type="hidden" id="buildId" name="building_id">
+                <input type="text" id="buildName" name="building_name" placeholder="Record Name">
+                <select id="locationID" name="location_id">
+                    {% for location in locations %}
+                    <option value="{{ location[0] }}">{{ location[1] }}</option> <!-- Display location name, pass location ID -->
+                    {% endfor %}
+                </select>
                 <button type="submit">Save</button>
             </form>
         </div>
@@ -335,14 +339,14 @@
         function closeModal_loc() {
             document.getElementById('editModal_loc').style.display = 'none';
         }
-        function openModal_bui(id, name) {
-            document.getElementById('recordId').value = id;
-            document.getElementById('recordName').value = name;
-            document.getElementById('building_loc').value = location_id;
+        function openModal_bui(id, name, location_id) {
+            document.getElementById('buildId').value = id;
+            document.getElementById('buildName').value = name;
+            document.getElementById('locationID').value = location_id;
             document.getElementById('editModal_bui').style.display = 'flex';
         }
         
-        function closeModal_loc() {
+        function closeModal_bui() {
             document.getElementById('editModal_bui').style.display = 'none';
         }
         
